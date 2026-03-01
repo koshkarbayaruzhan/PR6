@@ -1,15 +1,49 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+package org.example.main;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import org.example.strategy.*;
+import org.example.strategy.model.*;
+import org.example.strategy.strategies.*;
+
+import org.example.observer.model.StockExchange;
+import org.example.observer.observers.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("=== TRAVEL SYSTEM ===");
+
+        TravelBookingContext context = new TravelBookingContext();
+
+        TripRequest trip = new TripRequest(
+                1000,
+                ServiceClass.BUSINESS,
+                2,
+                false,
+                true,
+                true
+        );
+
+        context.setStrategy(new PlaneStrategy());
+        System.out.println("Самолет: " + context.calculatePrice(trip));
+
+        context.setStrategy(new TrainStrategy());
+        System.out.println("Поезд: " + context.calculatePrice(trip));
+
+        context.setStrategy(new BusStrategy());
+        System.out.println("Автобус: " + context.calculatePrice(trip));
+
+        System.out.println("\n=== STOCK EXCHANGE ===");
+
+        StockExchange exchange = new StockExchange();
+
+        Trader t1 = new Trader("Aruzhan");
+        TradingBot bot = new TradingBot(450);
+
+        exchange.subscribe("AAPL", t1);
+        exchange.subscribe("AAPL", bot);
+
+        exchange.updatePrice("AAPL", 480);
+        exchange.updatePrice("AAPL", 430);
     }
 }
