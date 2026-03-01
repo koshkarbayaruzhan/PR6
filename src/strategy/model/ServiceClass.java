@@ -1,4 +1,6 @@
-package strategy.model;
+package org.example.strategy.model;
 
-public class ServiceClass {
+public enum ServiceClass {
+    ECONOMY,
+    BUSINESS
 }
