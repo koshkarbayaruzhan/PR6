@@ -1,4 +1,7 @@
-package strategy;
+package org.example.strategy;
 
-public class ICostCalculationStrategy {
+import org.example.strategy.model.TripRequest;
+
+public interface ICostCalculationStrategy {
+    double calculate(TripRequest request);
 }
