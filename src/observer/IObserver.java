@@ -1,4 +1,5 @@
-package observer;
+package org.example.observer;
 
-public class IObserver {
+public interface IObserver {
+    void update(String stock, double price);
 }
